@@ -144,8 +144,6 @@ def plot_learning_curve(estimator, title, X, y, ylim=None, cv=None,
 def plot_fitness_curve(x_axis, curve_rhc, curve_sa, curve_ga, curve_mim, title):
     plt.figure()
     plt.title('{} vs Iterations'.format(title))
-    # if ylim is not None:
-    #     plt.ylim(*ylim)
     plt.xlabel("Iterations")
     plt.ylabel(title)
     plt.xscale('log')
@@ -160,6 +158,39 @@ def plot_fitness_curve(x_axis, curve_rhc, curve_sa, curve_ga, curve_mim, title):
              label="Simulated Annealing")
     plt.plot(x_axis, curve_ga, color="b",
              label="Genetic Algorithm")
+
+    plt.legend(loc="best")
+    return plt
+
+def plot_param_curve(x_axis, curve, title, param):
+    plt.figure()
+    plt.title('{} vs {}'.format(title, param))
+    plt.xlabel(param)
+    plt.ylabel(title)
+    # plt.xscale('log')
+
+    plt.grid()
+
+    plt.plot(x_axis, curve, color="k",
+             label='{} with {}'.format(title, param))
+
+    plt.legend(loc="best")
+    return plt
+
+def plot_temp_curve(x_axis, curve_exp, curve_art, title):
+    plt.figure()
+    plt.title('Fitness vs Initial Temperature for Continuous Peaks')
+    plt.xlabel("Initial Temperature")
+    plt.ylabel(title)
+    # plt.xscale('log')
+
+    plt.grid()
+
+    plt.plot(x_axis, curve_exp, color="g",
+             label='Exponential Decay')
+
+    plt.plot(x_axis, curve_art, color="r",
+             label='Arithmetic Decay')
 
     plt.legend(loc="best")
     return plt
